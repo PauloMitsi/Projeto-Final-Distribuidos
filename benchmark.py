@@ -20,7 +20,7 @@ TAMANHOS_MATRIZ = [50, 100, 200] # Ex: 50, 100, 200
 CONTAGEM_WORKERS = [2, 4, 8]      # Ex: 2, 4, 8, 16
 # ---------------------------
 
-# Regex para capturar o tempo de execução (ex: "Tempo total: 12.3456 s")
+# Regex para capturar o tempo de execução
 TIME_REGEX = re.compile(r"Tempo total:\s*([\d\.]+)\s*s")
 
 def extrair_tempo(output: str) -> float:
@@ -83,7 +83,6 @@ def main():
             resultados.append(["Paralelo", n, ITERACOES, w, tempo])
 
     # --- Testes Distribuídos ---
-    # (Estes são mais complexos de orquestrar)
     for n in TAMANHOS_MATRIZ:
         for w in CONTAGEM_WORKERS:
             print(f"\nTestando Distribuído (Matriz: {n}x{n}, Workers: {w})...")

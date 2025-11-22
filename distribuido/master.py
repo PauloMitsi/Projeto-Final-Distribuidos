@@ -1,10 +1,3 @@
-"""
-O Mestre (Servidor) (master_simplificado.py)
---------------------------------------------
-Versão simplificada que contém todo o código necessário em um
-único arquivo (comunicação, lógica de inicialização, etc.).
-"""
-
 import socket
 import time
 import argparse
@@ -28,7 +21,7 @@ def send_msg(sock: socket.socket, obj: object):
     """Serializa e envia um objeto com um cabeçalho de tamanho."""
     try:
         data = pickle.dumps(obj)
-        header = struct.pack('Q', len(data)) # 'Q' = unsigned long long (8 bytes)
+        header = struct.pack('Q', len(data))
         sock.sendall(header)
         sock.sendall(data)
     except (socket.error, pickle.PickleError) as e:
@@ -41,7 +34,7 @@ def recv_all(sock: socket.socket, n: int) -> bytearray:
     while len(data) < n:
         packet = sock.recv(n - len(data))
         if not packet:
-            return None # Conexão fechada
+            return None
         data.extend(packet)
     return data
 
@@ -50,13 +43,12 @@ def recv_msg(sock: socket.socket) -> object:
     try:
         header_data = recv_all(sock, HEADER_SIZE)
         if not header_data:
-            return None # Conexão fechada
-        
+            return None    
         msg_len = struct.unpack('Q', header_data)[0]
         data = recv_all(sock, msg_len)
         
         if not data:
-            return None # Conexão fechada
+            return None
             
         return pickle.loads(data)
     except (socket.error, pickle.PickleError, struct.error) as e:

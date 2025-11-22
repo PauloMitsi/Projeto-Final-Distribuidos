@@ -1,6 +1,7 @@
 """
-Script Lançador de DEMONSTRAÇÃO COMPLETA
+Script Lançador de DEMONSTRAÇÃO COMPLETA (feito com ajuda de IA)
 ------------------------------------------------------------
+
 Este script demonstra TODAS AS TRÊS implementações em sequência
 para uso em sua apresentação de vídeo.
 

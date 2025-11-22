@@ -22,8 +22,7 @@ HOST = '127.0.0.1' # Endereço do Mestre
 PORT = 65432
 HEADER_SIZE = 8 # 8 bytes para o cabeçalho de tamanho
 
-# --- Módulo de Comunicação (Embutido) ---
-# ... (funções send_msg, recv_all, recv_msg - sem alterações) ...
+# --- Módulo de Comunicação ---
 def send_msg(sock: socket.socket, obj: object):
     """Serializa e envia um objeto com um cabeçalho de tamanho."""
     try:
@@ -63,8 +62,7 @@ def recv_msg(sock: socket.socket) -> object:
         print(f"[ERRO COMUNICACAO] Erro ao receber dados: {e}")
         raise
 
-# --- Lógica de Simulação (Embutida e CORRIGIDA) ---
-# ... (função processar_fatia - sem alterações) ...
+# --- Lógica de Simulação ---
 def processar_fatia(read_grid: np.ndarray,
                       write_grid: np.ndarray,
                       N: int,
@@ -78,7 +76,7 @@ def processar_fatia(read_grid: np.ndarray,
     local_height = write_grid.shape[0]
 
     for x in range(local_height):
-        read_x = x + 1 # +1 por causa do halo superior em read_grid[0]
+        read_x = x + 1
         
         for y in range(N):
             estado_atual = read_grid[read_x, y]
@@ -94,9 +92,7 @@ def processar_fatia(read_grid: np.ndarray,
                             continue
                         
                         nx, ny = read_x + i_v, y + j_v
-                        
-                        # --- CORREÇÃO DO BUG ESTÁ AQUI ---
-                        # Checa os limites da coluna (ny)
+                    
                         if 0 <= ny < N:
                             if read_grid[nx, ny] == INFECTADO:
                                 if random_state.rand() < p_infeccao:
@@ -124,7 +120,7 @@ def run_worker(master_host: str, master_port: int):
     try:
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
             
-            # --- MUDANÇA AQUI: Loop de Tentativa de Conexão ---
+            # --- Loop de Tentativa de Conexão ---
             max_tentativas = 5
             for tentativa in range(max_tentativas):
                 try:
@@ -140,7 +136,6 @@ def run_worker(master_host: str, master_port: int):
                         raise
                     # Se não for a última, espere e tente de novo
                     time.sleep(1)
-            # --- FIM DA MUDANÇA ---
             
             
             # 1. Receber Info de Inicialização
@@ -169,7 +164,7 @@ def run_worker(master_host: str, master_port: int):
                 N = data_slice.shape[1]
                 slice_height = data_slice.shape[0]
                 
-                # Montar o grid de LEITURA local (com halos)
+                # Montar o grid de LEITURA local
                 read_grid_local = np.zeros((slice_height + 2, N), dtype=np.int8)
                 read_grid_local[1:-1, :] = data_slice
                 read_grid_local[0, :] = top_halo

@@ -1,11 +1,9 @@
 """
-Script de Geração de Gráficos (plotar_graficos.py)
+Script de Geração de Gráficos
 --------------------------------------------------
 Lê o 'resultados.csv' (gerado pelo benchmark.py) e cria
 os gráficos de análise de desempenho exigidos.
 
-Requer: pandas, matplotlib, seaborn
-(pip install pandas matplotlib seaborn)
 """
 
 import pandas as pd

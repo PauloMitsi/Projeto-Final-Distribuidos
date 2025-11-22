@@ -106,7 +106,7 @@ python ./paralelo/paralelo_sir.py <tamanho> <iteracoes> <num_threads>
 
 ## Autores
 
-  * **Claudiney Júnior Givisiez** - Implementação Sequencial.
+  * **Claudiney Júnior Givisiez** - Implementação da lógica Distribuída (Multi-Process)
   * **Victor Ribeiro Calado** - Implementação da lógica Paralela (Multi-Thread).
   * **Paulo Cesar de Oliveira Mitsi** - Implementação da lógica de benchmark (simulação, benchmark e plotar_graficos)
-  * **Pedro Enzo Laurynovi** - Implementação da lógica Distribuída (Multi-Process)
+  * **Pedro Enzo Laurynovi** - Implementação Sequencial.

@@ -1,6 +1,4 @@
 """
-Simulação SIR/SIS - Versão SEQUENCIAL CORRIGIDA (Lógica "Pull")
-----------------------------------------------------------------
 Uso:
     python sequencial_sir.py <tamanho_matriz> <num_iteracoes>
 
@@ -64,7 +62,7 @@ def simular_sequencial(N, num_iteracoes):
                         for j_v in [-1, 0, 1]:
                             if i_v == 0 and j_v == 0:
                                 continue
-                            
+            
                             nx, ny = x + i_v, y + j_v
                             # Checa se o vizinho está dentro dos limites
                             if 0 <= nx < N and 0 <= ny < N:
@@ -85,7 +83,7 @@ def simular_sequencial(N, num_iteracoes):
 
     end_time = time.time()
     tempo_execucao = end_time - start_time
-    print(f"Simulação sequencial concluída.")
+    print("Simulação sequencial concluída.")
 
     # Determina qual grid é o final
     grid_final = grids[num_iteracoes % 2]

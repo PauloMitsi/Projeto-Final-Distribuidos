@@ -1,8 +1,4 @@
-
 """
-Parte Algoritmo de Paralelização por: Victor Ribeiro Calado
-
-
 Testes realizados
 python paralelo_sir.py 500 100 4   4 Threads
 python paralelo_sir.py 500 100 2   2 Threads
